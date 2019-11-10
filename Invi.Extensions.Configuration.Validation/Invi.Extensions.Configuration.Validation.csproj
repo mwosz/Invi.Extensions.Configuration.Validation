@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <PackageVersion>1.0.1</PackageVersion>
+        <Authors>Marcin Wosz</Authors>
     </PropertyGroup>
 
     <ItemGroup>
