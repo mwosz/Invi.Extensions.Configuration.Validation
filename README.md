@@ -36,33 +36,33 @@ class ConfigTest : IValidation<ConfigTest>
 
 ```c#
 public static class Program
+{
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        try
         {
-            try
-            {
-                CreateHostBuilder(args)
-                    .Build().Run();
-            }
-            catch (ValidationException e)
-            {
-                Console.WriteLine(e.Message);
-                Environment.ExitCode = 1;
-            }
+            CreateHostBuilder(args)
+                .Build().Run();
         }
-
-        private static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureServices((hostContext, services) =>
-                {
-                    var configuration = new ConfigurationBuilder()
-                        .AddEnvironmentVariables()
-                        .Build();
-
-                    services.AddOptions();
-                    services.ConfigureAndValidate<ConfigTest>(configuration);
-
-                    services.UseConfigurationValidation();
-                });
+        catch (ValidationException e)
+        {
+            Console.WriteLine(e.Message);
+            Environment.ExitCode = 1;
+        }
     }
+
+    private static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureServices((hostContext, services) =>
+            {
+                var configuration = new ConfigurationBuilder()
+                    .AddEnvironmentVariables()
+                    .Build();
+
+                services.AddOptions();
+                services.ConfigureAndValidate<ConfigTest>(configuration);
+
+                services.UseConfigurationValidation();
+            });
+}
 ```
