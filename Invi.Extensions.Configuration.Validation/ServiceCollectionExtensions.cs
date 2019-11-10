@@ -10,6 +10,7 @@ namespace Invi.Extensions.Configuration.Validation
         {
             services.AddSingleton<ValidationStartupFilter>();
             using var scope = services.BuildServiceProvider().CreateScope();
+            scope.ServiceProvider.GetRequiredService<ValidationStartupFilter>();
 
             return services;
         }
