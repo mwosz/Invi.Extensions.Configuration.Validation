@@ -4,6 +4,7 @@
         <TargetFramework>netcoreapp3.0</TargetFramework>
         <PackageVersion>1.0.1</PackageVersion>
         <Authors>Marcin Wosz</Authors>
+        <AssemblyVersion>1.0.1</AssemblyVersion>
     </PropertyGroup>
 
     <ItemGroup>

@@ -23,7 +23,7 @@ steps:
     inputs:
       command: 'pack'
       packagesToPack: '**/*.csproj'
-      versioningScheme: 'off'
+      versioningScheme: 'byBuildNumber'
   - task: NuGetAuthenticate@0
     inputs:
       forceReinstallCredentialProvider: true
