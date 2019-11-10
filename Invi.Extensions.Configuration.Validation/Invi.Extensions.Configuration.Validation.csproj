@@ -2,9 +2,13 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.0</TargetFramework>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Include="..\azure-pipelines.yml">
+        <Link>azure-pipelines.yml</Link>
+      </Content>
       <Content Include="..\LICENSE">
         <Link>LICENSE</Link>
       </Content>

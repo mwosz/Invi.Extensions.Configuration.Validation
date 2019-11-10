@@ -1,0 +1,37 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: NuGetToolInstaller@1
+    displayName: 'Install NuGet'
+    inputs:
+      versionSpec:
+  - task: NuGetCommand@2
+    displayName: 'Restore packages'
+    inputs:
+      command: 'restore'
+      restoreSolution: '**/*.sln'
+      feedsToUse: 'select'
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'build'
+  - task: NuGetCommand@2
+    displayName: 'Create package'
+    inputs:
+      command: 'pack'
+      packagesToPack: '**/*.csproj'
+      versioningScheme: 'off'
+  - task: NuGetAuthenticate@0
+    inputs:
+      forceReinstallCredentialProvider: true
+  - task: NuGetCommand@2
+    displayName: 'Publish'
+    inputs:
+      command: 'push'
+      vstsFeed: 'fe66a19d-9f8d-4e22-9bf7-c29773aa3acc'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+      nuGetFeedType: 'external'
+      publishFeedCredentials: 'NuGet.org'
