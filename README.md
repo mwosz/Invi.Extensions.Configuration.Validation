@@ -22,6 +22,21 @@ The class that stores configuration data must implement interface **IValidation*
 class FooConfig : IValidation<FooConfig>
 ```
 
+Keep in mind that this is still a .net core way to provide configuration to classes. 
+All you have to do is inject the config into the class
+
+```c#
+public class FooService
+{
+    private readonly FooConfig _config;
+
+    public FooService(IOptions<FooConfig> config)
+    {
+        _config = config.Value;
+    }
+}
+```
+
 ### Examples
 
 The program will validate whether **TestVariable** has been set in environment variables
